@@ -30,6 +30,7 @@ def add_title():
 def count_words():
     if request.method == 'POST':
         body_json = request.get_json()
+        print(body_json)
         send_post = requests.post("http://localhost:5531/count", json=body_json)
         response = send_post.content
         return response

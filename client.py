@@ -142,8 +142,7 @@ def main():
                 path = get_file_path()
                 response = requests.post("http://localhost:5525/count", json={"path": path})
                 if response.status_code == 200:
-                    # stats = response.content.decode('ascii')
-                    stats = json.loads(response.content)
+                    stats = response.content.decode('ascii')
                     print(stats)
 
 
