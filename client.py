@@ -144,6 +144,15 @@ def main():
                 if response.status_code == 200:
                     stats = response.content.decode('ascii')
                     print(stats)
+                    continue
+
+            elif command == "stats":
+                print("The server will show you the number of books saved and the size of the server:")
+                response = requests.get("http://localhost:5525/stats")
+                if response.status_code == 200:
+                    stats = response.content.decode('ascii')
+                    print(stats)
+                    continue
 
 
         except ValueError:
