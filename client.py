@@ -163,6 +163,15 @@ def main():
                     print(f"All titles by {name} are: {titles}")
                     continue
 
+            elif command == "sort":
+                print("You can sort titles alphabetically: ")
+
+                response = requests.post("http://localhost:5525/sort", json={"type": "ALPHA"})
+                if response.status_code == 200:
+                    titles = json.loads(response.content)
+                    print(titles)
+                    continue
+
 
         except ValueError:
             print("Command not recognized.\n")
