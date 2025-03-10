@@ -154,6 +154,15 @@ def main():
                     print(stats)
                     continue
 
+            elif command == "search":
+                print("You can search titles by author's last name:")
+                name = input("Enter last name: ").lower()
+                response = requests.post("http://localhost:5525/search", json={"item": name})
+                if response.status_code == 200:
+                    titles = json.loads(response.content)
+                    print(f"All titles by {name} are: {titles}")
+                    continue
+
 
         except ValueError:
             print("Command not recognized.\n")

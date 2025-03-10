@@ -4,6 +4,11 @@ import requests
 import base64
 import json
 
+def read_json_as_dict(file_path):
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+    return data
+
 def read_stats_file(path):
     stats = []
     try:
@@ -50,6 +55,17 @@ def get_stats():
     # make_json = json.dumps(dictionary)
     # print(make_json)
     send_post = requests.post("http://localhost:5529/stats", json = dictionary)
+    print(send_post.status_code)
+    response = send_post.content
+    return response
+
+@app.route('/search', methods = ['GET', 'POST'])
+def search_author():
+    requested_name = request.get_json()
+    print(requested_name)
+    dictionary = read_json_as_dict("/home/lora/Microservices/data.txt")
+    dictionary["item"] = requested_name["item"]
+    send_post = requests.post("http://localhost:5528/search", json = dictionary)
     print(send_post.status_code)
     response = send_post.content
     return response
